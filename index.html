@@ -148,6 +148,105 @@
         })
         .catch(error => console.error("❌ خطأ في تحميل أسماء الدورات:", error));
     });
+
+function generateCertificatePDF(name, department, courseStartDate, residencyStatus, email, courseName) {
+  const folder = DriveApp.getFolderById("1BWu9yqqD27CcZtB-iZ3BNKlxp24r6pEH");
+
+  // ✅ رقم الشهادة الفريد
+  const serialNumber = "CERT-" + new Date().getTime();
+
+  // ✅ إنشاء Google Doc جديد باسم منظم
+  const fileName = `شهادة - ${name} - ${courseName}`;
+  const doc = DocumentApp.create(fileName);
+  const body = doc.getBody();
+
+  // ✅ خلفية (مؤثر بلون رمادي بسيط)
+  body.setBackgroundColor("#f5f5f5");
+
+  // ✅ إضافة اللوجو
+  try {
+    const imageResponse = UrlFetchApp.fetch("https://raw.githubusercontent.com/etiqotwf/liveServer/main/logo.jpg");
+    const logoBlob = imageResponse.getBlob();
+    body.appendImage(logoBlob).setWidth(100).setHeight(100).setAlignment(DocumentApp.HorizontalAlignment.CENTER);
+  } catch (e) {
+    Logger.log("❌ فشل تحميل اللوجو: " + e);
+  }
+
+  // ✅ عنوان المؤسسة
+  body.appendParagraph("مركز تدريب الصرف بطنطا")
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1)
+    .setAlignment(DocumentApp.HorizontalAlignment.CENTER);
+  body.appendParagraph("Drainage Training Center - Tanta (DTC)")
+    .setHeading(DocumentApp.ParagraphHeading.HEADING2)
+    .setAlignment(DocumentApp.HorizontalAlignment.CENTER);
+  body.appendParagraph("———————————————————————————————————————")
+    .setAlignment(DocumentApp.HorizontalAlignment.CENTER);
+
+  // ✅ عنوان الشهادة
+  body.appendParagraph("📜 شهادة اجتياز دورة تدريبية")
+    .setBold(true)
+    .setFontSize(18)
+    .setAlignment(DocumentApp.HorizontalAlignment.CENTER)
+    .setSpacingAfter(20);
+
+  // ✅ نص الشهادة
+  const content =
+    `يشهد مركز تدريب الصرف بطنطا بأن المتدرب:\n\n` +
+    `👤 الاسم: ${name}\n` +
+    `🏢 الإدارة: ${department}\n` +
+    `📅 تاريخ بداية الدورة: ${courseStartDate}\n` +
+    `🏨 حالة الإقامة: ${residencyStatus}\n\n` +
+    `✅ قد اجتاز دورة "${courseName}" بنجاح، ونتمنى له دوام التفوق والنجاح.`;
+
+  body.appendParagraph(content)
+    .setFontSize(14)
+    .setLineSpacing(1.5)
+    .setSpacingAfter(20);
+
+  // ✅ رقم الشهادة
+  body.appendParagraph("🔢 رقم الشهادة: " + serialNumber)
+    .setFontSize(12)
+    .setItalic(true)
+    .setAlignment(DocumentApp.HorizontalAlignment.RIGHT);
+
+  // ✅ QR Code من رابط التحقق
+  const qrURL = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent("شهادة: " + serialNumber + " - " + name)}&size=100x100`;
+  try {
+    const qrBlob = UrlFetchApp.fetch(qrURL).getBlob();
+    body.appendParagraph("\n").appendImage(qrBlob).setAlignment(DocumentApp.HorizontalAlignment.LEFT);
+  } catch (e) {
+    Logger.log("❌ فشل توليد QR: " + e);
+  }
+
+  // ✅ توقيع
+  body.appendParagraph("\n\nالتوقيع:")
+    .setBold(true)
+    .setSpacingBefore(20);
+  body.appendParagraph("رئيس الإدارة المركزية للتدريب").setBold(true);
+  body.appendParagraph("دكتور/ محمود الحداد").setBold(true);
+
+  doc.saveAndClose();
+
+  // ✅ تحويل إلى PDF
+  const pdfFile = DriveApp.getFileById(doc.getId()).getAs(MimeType.PDF);
+  const createdFile = folder.createFile(pdfFile).setName(fileName + ".pdf");
+
+  // ✅ إرسال الشهادة إلى البريد
+  if (email) {
+    MailApp.sendEmail({
+      to: email,
+      subject: "📜 شهادتك من مركز تدريب الصرف بطنطا",
+      body: `أستاذ/ ${name}،\n\nأرفقنا لك شهادة اجتياز الدورة "${courseName}".\n\nمع تحياتنا.\nمركز تدريب الصرف بطنطا`,
+      attachments: [createdFile],
+      name: "مركز تدريب الصرف بطنطا"
+    });
+  }
+}
+
+
+
+
+
   </script>
 </head>
 
