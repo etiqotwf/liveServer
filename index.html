@@ -136,7 +136,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("https://script.google.com/macros/s/AKfycbxTdrAJKgw9dAGfyFFitApOfXql1e9I0FqyDcgzUVDggNPxru0UytLiheZvV193U-8wRw/exec")
+      fetch("https://script.google.com/macros/s/AKfycbzl7AtFD5SztPGRW6jxtFaQ6uljV_yj74vRHAmr3CK4xKclt7-rH6CuO4MsDX_Th21S_A/exec")
         .then(response => response.json())
         .then(data => {
           const datalist = document.getElementById("courseList");
@@ -160,12 +160,15 @@
 
     <h2>📝 نموذج تقييم الدورة التدريبية</h2>
 
-    <form action="https://script.google.com/macros/s/AKfycbxTdrAJKgw9dAGfyFFitApOfXql1e9I0FqyDcgzUVDggNPxru0UytLiheZvV193U-8wRw/exec" method="post">
+    <form action="https://script.google.com/macros/s/AKfycbzl7AtFD5SztPGRW6jxtFaQ6uljV_yj74vRHAmr3CK4xKclt7-rH6CuO4MsDX_Th21S_A/exec" method="post">
       <label>👤 اسم المتدرب:</label>
       <input type="text" name="traineeName" placeholder="ادخل اسمك الكامل" required>
 
       <label>📱 رقم الهاتف:</label>
       <input type="text" name="traineePhone" placeholder="ادخل رقم الهاتف" required>
+
+      <label>📧 البريد الإلكتروني:</label>
+<input type="email" name="traineeEmail" placeholder="ادخل البريد الإلكتروني" required>
 
       <label>🏢 الإدارة:</label>
       <input type="text" name="department" placeholder="ادخل اسم الإدارة" required>
