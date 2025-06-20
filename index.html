@@ -79,42 +79,42 @@
     .dtc {
       color: #ff79c6;
     }
-@media (max-width: 600px) {
-  .logo-container img {
-    width: 50px !important;
-    height: 50px !important;
-  }
-  .design-text {
-    font-size: 10px !important;
-    left: 20px !important;
-    top: 60px !important;
-  }
-  .emoji-icon {
-    font-size: 50px !important;
-    top: 40px !important;
-    right: 30px !important;
-  }
-}
+    @media (max-width: 600px) {
+      .logo-container img {
+        width: 50px !important;
+        height: 50px !important;
+      }
+      .design-text {
+        font-size: 10px !important;
+        left: 20px !important;
+        top: 60px !important;
+      }
+      .emoji-icon {
+        font-size: 50px !important;
+        top: 40px !important;
+        right: 30px !important;
+      }
+    }
   </style>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      // تفعيل وضع ملء الشاشة مرة واحدة
       document.body.addEventListener("click", function () {
         const elem = document.documentElement;
-        if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        if (!document.fullscreenElement) {
           if (elem.requestFullscreen) {
             elem.requestFullscreen();
           } else if (elem.webkitRequestFullscreen) {
             elem.webkitRequestFullscreen();
           } else if (elem.msRequestFullscreen) {
             elem.msRequestFullscreen();
-          } else {
-            alert("المتصفح لا يدعم fullscreen.");
           }
         }
       }, { once: true });
 
-      fetch("https://script.google.com/macros/s/AKfycbxikd3o2PQBxnF7Lqs-t_0q-Hf_egJLzN6qG_V3TAys1_0pucyhPX4hFsAMN7xhFkl9Ww/exec")
+      // تحميل أسماء الدورات
+      fetch("https://script.google.com/macros/s/AKfycbzsP13vaBjKq_0Ww4NLXx0RkFbX2tToxrSes8MJP6KJU3dRQvqLNSe-mtbYL20pZXEgtQ/exec")
         .then(response => response.json())
         .then(data => {
           const datalist = document.getElementById("courseList");
@@ -132,15 +132,20 @@
       const form = event.target;
       const formData = new FormData(form);
 
-      await fetch(form.action, {
+      // 🔄 إظهار رسالة مؤقتة
+      alert("📤 جاري إرسال البيانات وإنشاء الشهادة...");
+
+      // إرسال البيانات
+      await fetch("https://script.google.com/macros/s/AKfycbzsP13vaBjKq_0Ww4NLXx0RkFbX2tToxrSes8MJP6KJU3dRQvqLNSe-mtbYL20pZXEgtQ/exec", {
         method: "POST",
         body: formData
       });
 
+      // انتظار توليد الشهادة تلقائياً
       setTimeout(() => {
         fetch("https://script.google.com/macros/s/AKfycbzsP13vaBjKq_0Ww4NLXx0RkFbX2tToxrSes8MJP6KJU3dRQvqLNSe-mtbYL20pZXEgtQ/exec?action=generateCertificate")
           .then(res => res.text())
-          .then(msg => alert(msg))
+          .then(msg => alert("✅ " + msg))
           .catch(err => alert("❌ حدث خطأ أثناء توليد الشهادة!"));
       }, 3000);
     }
@@ -156,7 +161,7 @@
 
     <h2>📝 نموذج تقييم الدورة التدريبية</h2>
 
-    <form id="evaluationForm" onsubmit="sendFormAndGenerate(event)" action="https://script.google.com/macros/s/AKfycbxikd3o2PQBxnF7Lqs-t_0q-Hf_egJLzN6qG_V3TAys1_0pucyhPX4hFsAMN7xhFkl9Ww/exec" method="post">
+    <form id="evaluationForm" onsubmit="sendFormAndGenerate(event)">
       <label>👤 اسم المتدرب:</label>
       <input type="text" name="traineeName" required>
 
