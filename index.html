@@ -36,7 +36,7 @@
       font-size: 22px;
     }
 
-    select, input[type="text"], textarea {
+    select, input[type="text"], input[type="date"], textarea {
       width: 100%;
       padding: 12px;
       margin-top: 5px;
@@ -136,7 +136,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("https://script.google.com/macros/s/AKfycbylAbL8fat43YGq3XNtrttXKwT9W7zhhqO2eV1kXlj98q2ot9NclwJI5u9LmQYEqfYkVg/exec")
+      fetch("https://script.google.com/macros/s/AKfycbz-TZJnvz7WP3yaN6h0SWWGILgGdb0AYu5nAufGYVM_Hqc2AL-DS1Tsj-2eJdjPxD_8JA/exec")
         .then(response => response.json())
         .then(data => {
           const datalist = document.getElementById("courseList");
@@ -160,7 +160,7 @@
 
     <h2>📝 نموذج تقييم الدورة التدريبية</h2>
 
-    <form action="https://script.google.com/macros/s/AKfycbylAbL8fat43YGq3XNtrttXKwT9W7zhhqO2eV1kXlj98q2ot9NclwJI5u9LmQYEqfYkVg/exec" method="post">
+    <form action="https://script.google.com/macros/s/AKfycbz-TZJnvz7WP3yaN6h0SWWGILgGdb0AYu5nAufGYVM_Hqc2AL-DS1Tsj-2eJdjPxD_8JA/exec" method="post">
       <label>👤 اسم المتدرب:</label>
       <input type="text" name="traineeName" placeholder="ادخل اسمك الكامل" required>
 
@@ -170,16 +170,25 @@
       <label>🏢 الإدارة:</label>
       <input type="text" name="department" placeholder="ادخل اسم الإدارة" required>
 
+      <label>🎓 المؤهل:</label>
+      <input type="text" name="qualification" placeholder="ادخل المؤهل الدراسي" required>
+
+      <label>💼 الوظيفة:</label>
+      <input type="text" name="jobTitle" placeholder="ادخل الوظيفة الحالية" required>
+
       <label>🏨 حالة الإقامة:</label>
       <select name="residencyStatus" required>
         <option value="">اختر الحالة</option>
         <option>مقيم</option>
-        <option>غير </option>
+        <option>غير</option>
       </select>
 
       <label>📘 اسم الدورة:</label>
       <input type="text" name="courseName" list="courseList" placeholder="اكتب أو اختر اسم الدورة" required>
       <datalist id="courseList"></datalist>
+
+      <label>📅 تاريخ بداية الدورة:</label>
+      <input type="date" name="courseStartDate" required>
 
       <label>🧑‍🏫 تقييم المدرب:</label>
       <select name="trainerRating" required>
@@ -199,8 +208,17 @@
         <option>ضعيف</option>
       </select>
 
-      <label>🏨 تقييم الإقامة والتنظيم:</label>
-      <select name="timeRating" required>
+      <label>🏢 تقييم التنظيم وقاعة المحاضرات:</label>
+      <select name="organizationRating" required>
+        <option>ممتاز</option>
+        <option>جيد جداً</option>
+        <option>جيد</option>
+        <option>مقبول</option>
+        <option>ضعيف</option>
+      </select>
+
+      <label>🏨 تقييم الإقامة:</label>
+      <select name="residencyRating" required>
         <option>ممتاز</option>
         <option>جيد جداً</option>
         <option>جيد</option>
@@ -241,7 +259,7 @@
 <!-- أيقونة التقييم 📝 -->
 <div class="emoji-icon" style="
   position: fixed;
-  top: 80;
+  top: 80px;
   right: 50px;
   font-size: 70px;
   font-weight: bold;
