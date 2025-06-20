@@ -114,7 +114,7 @@
       }, { once: true });
 
       // تحميل أسماء الدورات
-      fetch("https://script.google.com/macros/s/AKfycbzsP13vaBjKq_0Ww4NLXx0RkFbX2tToxrSes8MJP6KJU3dRQvqLNSe-mtbYL20pZXEgtQ/exec")
+      fetch("https://https://script.google.com/macros/s/AKfycbzNc3VVCunwYGCGe4DhXSFgF1Tede5_bbYArgPW4TqYYuI_HSMV-QcruJBwYW2rreEZ8w/exec")
         .then(response => response.json())
         .then(data => {
           const datalist = document.getElementById("courseList");
@@ -136,7 +136,7 @@
       alert("📤 جاري إرسال البيانات وإنشاء الشهادة...");
 
       // إرسال البيانات
-      await fetch("https://script.google.com/macros/s/AKfycbzsP13vaBjKq_0Ww4NLXx0RkFbX2tToxrSes8MJP6KJU3dRQvqLNSe-mtbYL20pZXEgtQ/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbzNc3VVCunwYGCGe4DhXSFgF1Tede5_bbYArgPW4TqYYuI_HSMV-QcruJBwYW2rreEZ8w/exec", {
         method: "POST",
         body: formData
       });
