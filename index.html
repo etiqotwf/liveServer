@@ -3,6 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const submitBtn = form.querySelector("button[type='submit']");
+
+    form.addEventListener("submit", function () {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "📤 جارٍ الإرسال..."; // يمكن تعديل النص حسب الحاجة
+    });
+  });
+</script>
+
+
   <title>نموذج تقييم الدورة</title>
   <style>
     body {
@@ -136,7 +150,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("https://script.google.com/macros/s/AKfycbx_-QePHPF0Hsiatb8mPLXDTaq6oMbAFv3P-OAmgGCA0KHMo09hW4asg46RHtvS-dQ0sA/exec")
+      fetch("https://script.google.com/macros/s/AKfycbxnhOjMZPDc3Hbvaz4a55R5bjOUIactJaS1ApL81udz9SsLzsW1yRLWyc51P9cNBEHfPw/exec")
         .then(response => response.json())
         .then(data => {
           const datalist = document.getElementById("courseList");
@@ -160,7 +174,7 @@
 
     <h2>📝 نموذج تقييم الدورة التدريبية</h2>
 
-    <form action="https://script.google.com/macros/s/AKfycbx_-QePHPF0Hsiatb8mPLXDTaq6oMbAFv3P-OAmgGCA0KHMo09hW4asg46RHtvS-dQ0sA/exec" method="post">
+    <form action="https://script.google.com/macros/s/AKfycbxnhOjMZPDc3Hbvaz4a55R5bjOUIactJaS1ApL81udz9SsLzsW1yRLWyc51P9cNBEHfPw/exec" method="post">
       <label>👤 اسم المتدرب:</label>
       <input type="text" name="traineeName" placeholder="ادخل اسمك الكامل" required>
 
@@ -226,13 +240,15 @@
       </select>
 
       <label>🏨 تقييم الإقامة:</label>
-      <select name="residencyRating" required>
-        <option>ممتاز</option>
-        <option>جيد جداً</option>
-        <option>جيد</option>
-        <option>مقبول</option>
-        <option>ضعيف</option>
-      </select>
+<select name="residencyRating">
+  <option value="">اختر التقييم</option>
+  <option>ممتاز</option>
+  <option>جيد جداً</option>
+  <option>جيد</option>
+  <option>مقبول</option>
+  <option>ضعيف</option>
+</select>
+
 
       <label>📝 ملاحظات إضافية:</label>
       <textarea name="comments" placeholder="اكتب ملاحظاتك إن وجدت..."></textarea>
