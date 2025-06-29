@@ -150,7 +150,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("https://script.google.com/macros/s/AKfycbxnhOjMZPDc3Hbvaz4a55R5bjOUIactJaS1ApL81udz9SsLzsW1yRLWyc51P9cNBEHfPw/exec")
+      fetch("https://script.google.com/macros/s/AKfycbwPyoM-XmcNuLL113seGXm2Iuv1agiLn2oDTrzuk-jM1DQ6dZaISHI5lZ63-ehb4HyTYQ/exec")
         .then(response => response.json())
         .then(data => {
           const datalist = document.getElementById("courseList");
@@ -174,7 +174,7 @@
 
     <h2>📝 نموذج تقييم الدورة التدريبية</h2>
 
-    <form action="https://script.google.com/macros/s/AKfycbxnhOjMZPDc3Hbvaz4a55R5bjOUIactJaS1ApL81udz9SsLzsW1yRLWyc51P9cNBEHfPw/exec" method="post">
+    <form action="https://script.google.com/macros/s/AKfycbwPyoM-XmcNuLL113seGXm2Iuv1agiLn2oDTrzuk-jM1DQ6dZaISHI5lZ63-ehb4HyTYQ/exec" method="post">
       <label>👤 اسم المتدرب:</label>
       <input type="text" name="traineeName" placeholder="ادخل اسمك الكامل" required>
 
@@ -182,7 +182,8 @@
       <input type="text" name="traineePhone" placeholder="ادخل رقم الهاتف" required>
 
       <label>📧 البريد الإلكتروني:</label>
-<input type="email" name="traineeEmail" placeholder="ادخل بريدك الإلكتروني">
+<input type="email" name="traineeEmail" value="tantadtc@gmail.com" readonly>
+
 
 
       <label>🏢 الإدارة:</label>
@@ -195,21 +196,100 @@
       <input type="text" name="jobTitle" placeholder="ادخل الوظيفة الحالية" required>
 
       <label>🏨 حالة الإقامة:</label>
-      <select name="residencyStatus" required>
-        <option value="">اختر الحالة</option>
-        <option>مقيم</option>
-        <option>بغير اقامة</option>
-      </select>
+<select name="residencyStatus" required>
+  <option value="">اختر الحالة</option>
+  <option value="مقيم">مقيم</option>
+  <option value="مقيمة">مقيمة</option>
+  <option value="غير مقيم">غير مقيم</option>
+  <option value="غير مقيمة">غير مقيمة</option>
+</select>
 
-      <label>📘 اسم الدورة:</label>
-      <input type="text" name="courseName" list="courseList" placeholder="اكتب أو اختر اسم الدورة" required>
-      <datalist id="courseList"></datalist>
 
-      <<label>📅 تاريخ بداية الدورة:</label>
-<input type="date" name="courseStartDate" required>
+<style>
+  select:disabled {
+    background-color: white;
+    color: black;
+  }
+</style>
+
+<label>📘 اسم الدورة:</label>
+<select id="courseName" name="courseName" required>
+  <option value="">اختر اسم الدورة</option>
+</select>
+
+<br><br>
+
+<label>📅 تاريخ بداية الدورة:</label>
+<select id="courseStartDate" name="courseStartDate" disabled required>
+  <option value="">---</option>
+</select>
+
+<br><br>
 
 <label>📅 تاريخ نهاية الدورة:</label>
-<input type="date" name="courseEndDate" required>
+<select id="courseEndDate" name="courseEndDate" disabled required>
+  <option value="">---</option>
+</select>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // 🗂️ الدورات وتواريخها
+    const courseData = {
+      "جافا سكريبت مستوى اول": { start: "2025-07-01", end: "2025-07-10" },
+      "دورة رقم 2": { start: "2024-09-08", end: "2024-09-12" },
+      "دورة رقم 3": { start: "2024-09-15", end: "2024-09-19" },
+      "دورة رقم 4": { start: "2024-09-22", end: "2024-09-26" },
+      "دورة رقم 5": { start: "2024-09-29", end: "2024-10-03" }
+    };
+
+    const courseSelect = document.getElementById("courseName");
+    const startSelect = document.getElementById("courseStartDate");
+    const endSelect = document.getElementById("courseEndDate");
+
+    // 🧩 توليد أسماء الدورات تلقائيًا
+    Object.keys(courseData).forEach(courseName => {
+      const option = document.createElement("option");
+      option.value = courseName;
+      option.textContent = courseName;
+      courseSelect.appendChild(option);
+    });
+
+    courseSelect.addEventListener("change", function () {
+      const selectedCourse = this.value;
+
+      // إعادة تعيين القوائم
+      startSelect.innerHTML = '<option value="">---</option>';
+      endSelect.innerHTML = '<option value="">---</option>';
+
+      if (selectedCourse && courseData[selectedCourse]) {
+        const startDate = courseData[selectedCourse].start;
+        const endDate = courseData[selectedCourse].end;
+
+        // توليد خيار واحد لكل من البداية والنهاية
+        const startOption = document.createElement("option");
+        startOption.value = startDate;
+        startOption.textContent = startDate;
+        startSelect.appendChild(startOption);
+
+        const endOption = document.createElement("option");
+        endOption.value = endDate;
+        endOption.textContent = endDate;
+        endSelect.appendChild(endOption);
+
+        startSelect.disabled = false;
+        endSelect.disabled = false;
+
+        // تعيين القيم تلقائيًا
+        startSelect.value = startDate;
+        endSelect.value = endDate;
+      } else {
+        startSelect.disabled = true;
+        endSelect.disabled = true;
+      }
+    });
+  });
+</script>
+
 
 
       <label>🧑‍🏫 تقييم المدرب:</label>
