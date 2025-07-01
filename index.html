@@ -150,7 +150,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("https://script.google.com/macros/s/AKfycbz7FaP2dNrWk1zJ4AjKKytrZw2V7xuPma9BvFvbD7Iv7pZCfFGrTSr-yEaZfFMy-qvD8Q/exec")
+      fetch("https://script.google.com/macros/s/AKfycbyWETGK_1F1af9smECmXVo0cY_mFJU_90-WsG3ZdVEwUNu084CGajqGWNz9JsKEPFPrrA/exec")
         .then(response => response.json())
         .then(data => {
           const datalist = document.getElementById("courseList");
@@ -174,7 +174,7 @@
 
     <h2>📝 نموذج تقييم الدورة التدريبية</h2>
 
-    <form action="https://script.google.com/macros/s/AKfycbz7FaP2dNrWk1zJ4AjKKytrZw2V7xuPma9BvFvbD7Iv7pZCfFGrTSr-yEaZfFMy-qvD8Q/exec" method="post">
+    <form action="https://script.google.com/macros/s/AKfycbyWETGK_1F1af9smECmXVo0cY_mFJU_90-WsG3ZdVEwUNu084CGajqGWNz9JsKEPFPrrA/exec" method="post">
       <label>👤 اسم المتدرب:</label>
       <input type="text" name="traineeName" placeholder="ادخل اسمك الكامل" required>
 
@@ -220,14 +220,14 @@
 <br><br>
 
 <label>📅 تاريخ بداية الدورة:</label>
-<select id="courseStartDate" name="courseStartDate" disabled required>
+<select id="courseStartDate" name="courseStartDate"  required>
   <option value="">---</option>
 </select>
 
 <br><br>
 
 <label>📅 تاريخ نهاية الدورة:</label>
-<select id="courseEndDate" name="courseEndDate" disabled required>
+<select id="courseEndDate" name="courseEndDate"  required>
   <option value="">---</option>
 </select>
 
@@ -235,7 +235,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     // 🗂️ الدورات وتواريخها
     const courseData = {
-      " ورشة عمل البنك الألمانى البرنامج العملى لقياسات السرعات والتصرفات فى القنوات المائية ": { start: "2025-06-30", end: "2025-07-2" }
+      "ورشة البرنامج العملى لقياسات السرعات والتصرفات فى القنوات المائية": { start: "2025-06-30", end: "2025-07-2" }
 
     };
 
