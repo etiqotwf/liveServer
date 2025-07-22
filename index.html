@@ -150,7 +150,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("https://script.google.com/macros/s/AKfycbz7FaP2dNrWk1zJ4AjKKytrZw2V7xuPma9BvFvbD7Iv7pZCfFGrTSr-yEaZfFMy-qvD8Q/exec")
+      fetch("https://script.google.com/macros/s/AKfycbyMuO94ZTn42Ov7vTUPYU1KPidOFl9MXEqKBcyvpZk50rcpEuGOaN8SAKzFl3IPdI1Ogg")
         .then(response => response.json())
         .then(data => {
           const datalist = document.getElementById("courseList");
@@ -174,7 +174,7 @@
 
     <h2>📝 نموذج تقييم الدورة التدريبية</h2>
 
-    <form action="https://script.google.com/macros/s/AKfycbz7FaP2dNrWk1zJ4AjKKytrZw2V7xuPma9BvFvbD7Iv7pZCfFGrTSr-yEaZfFMy-qvD8Q/exec" method="post">
+    <form action="https://script.google.com/macros/s/AKfycbyMuO94ZTn42Ov7vTUPYU1KPidOFl9MXEqKBcyvpZk50rcpEuGOaN8SAKzFl3IPdI1Ogg/exec" method="post">
       <label>👤 اسم المتدرب:</label>
       <input type="text" name="traineeName" placeholder="ادخل اسمك الكامل" required>
 
@@ -235,11 +235,8 @@
   document.addEventListener("DOMContentLoaded", function () {
     // 🗂️ الدورات وتواريخها
     const courseData = {
-      "جافا سكريبت مستوى ثانى": { start: "2025-07-10", end: "2025-07-15" },
-      "  ": { start: "2024-09-08", end: "2024-09-12" },
-      "  ": { start: "2024-09-15", end: "2024-09-19" },
-      "  ": { start: "2024-09-22", end: "2024-09-26" },
-      "  ": { start: "2024-09-29", end: "2024-10-03" }
+      "   ورشة عمل  AUTCAD 2D   ": { start: "2025-07-22", end: "2025-07-23" },
+
     };
 
     const courseSelect = document.getElementById("courseName");
